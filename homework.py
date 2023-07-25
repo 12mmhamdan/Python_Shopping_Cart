@@ -15,7 +15,7 @@ class Animal():
         clear_output()
         self.energy_level = self.energy_level - (energy_decrease)
         if self.energy_level <= 30:
-            print(f"{self.name.title()} is almost out of energy ! Please feed {self.name.title()} or let {self.name.title()} sleep to get some energy back!")
+            print(f"{self.name.title()} is almost out of energy! Please feed {self.name.title()} or let {self.name.title()} sleep to get some energy back!")
         else:
             print(f"Hope it was fun!")
     def eat(self):
@@ -34,9 +34,8 @@ class Animal():
         energy_increase = int(input(f"How much did {self.name.title()} sleep?"))
         clear_output()
         self.energy_level = self.energy_level + (energy_increase)
-        if self.energy_level > 100:
-            self.energy_level = 100
-            print(f"Here is the new energy level for {self.name.title()}\n{self.energy_level}")
+        if self.energy_level <= 0:
+            print(f"{self.name} is all out of energy!\n with {self.energy_level} energy!")
         else:
             print(f"Here is the new energy level for {self.name.title()}\n{self.energy_level}")
 animal1 = Animal('bob', 300)
