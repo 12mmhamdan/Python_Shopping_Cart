@@ -35,7 +35,8 @@ class Animal():
         clear_output()
         self.energy_level = self.energy_level + (energy_increase)
         if self.energy_level <= 0:
-            print(f"{self.name} is all out of energy!\n with {self.energy_level} energy!")
+            self.energy_level=0
+            print(f"{self.name.title()} is all out of energy with {self.energy_level} energy left.\nPlease give {self.name.title()} food or let them sleep to get some more energy back!")
         else:
             print(f"Here is the new energy level for {self.name.title()}\n{self.energy_level}")
 animal1 = Animal('bob', 300)
