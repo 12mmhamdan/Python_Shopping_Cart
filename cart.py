@@ -1,12 +1,14 @@
-# Using Python and the skills we learned over the past week, create a shopping cart program that will allow a user to add and remove items to a shopping cart. The cart should keep track of the quantity and price of each item.  The user should also be able to view the items that are currently in their cart. The user should be able to continue to add to, remove from, and view their cart until the user "quits" or "checks out". When the user quits/checks out, the program should display a receipt showing the items in the cart with quantity and price and the total price.
-import os
 import time
-
+import os
 def clear_output():
     os.system("cls" if os.name == "nt" else 'clear')
+
 class Cart():
-    def __init__(self):
+    def __init__(self, customer_name):
+        self.customer_name = customer_name.title()
         self.cart = {}
+
+    
 # Add items to cart
     def add_to_cart(self):
         item = input("What would you like to add to your cart? ")
@@ -23,14 +25,14 @@ class Cart():
             clear_output()
 
     # Remove items from cart
+
     def remove_from_cart(self):
         item = input("What would you like to remove from your cart? ")
         if item not in self.cart:
             clear_output()
-            print(f"{item.title()} is not currently in your cart. Please check your spelling and try again")
-            time.sleep(4)
+            print(f"{item.title()} is not currently in your cart. Please check your spelling and try again.")
+            time.sleep(5)
             clear_output()
-
         else:
             how_many = int((input(f"How many {item.title()}(s) would you like to remove? ")))
             self.cart[item]['how many'] -= how_many
@@ -41,8 +43,9 @@ class Cart():
             time.sleep(2)
             clear_output()
 
-    # Show current cart without total
-    def show_cart(self):
+    # Show current items in cart without total
+
+    def view_cart(self):
         if self.cart == {}:
             print("Your cart is empty. :(")
             time.sleep(2)
@@ -51,56 +54,60 @@ class Cart():
             print("Here is what you currently have in your cart:")
             for item, info in self.cart.items():
                 print(f"\n{info['how many']} {item.title()}(s) for ${info['price']:.2f} each.")
-            time.sleep(4)
+            time.sleep(5)
             clear_output()
 
-    # Remove all items from cart
+    # Clear cart of all items
+
     def clear_cart(self):
         if self.cart != {}:
-            confirm = input("Are you sure you want to clear cart?: \nYes or No: ").lower()
+            confirm = input("Please confirm you would like to clear your cart:\nYes or No ").lower()
             if confirm == 'yes':
                 clear_output()
                 self.cart.clear()
                 print("You've successfully cleared your cart!")
-                time.sleep(3)
+                time.sleep(2)
                 clear_output()
             else:
                 clear_output()
-                print("Clearing cancelled: Returning back to options ")
+                print("Ok, I've cancelled your clear request. Back to the beginning!")
                 time.sleep(3)
                 confirm == 'no'
                 clear_output()
-
         else:
+            clear_output()        
             print("Your cart is already empty.")
             time.sleep(3)
             clear_output()
-            
-# Checkout function
+
+    # Checkout with receipt
     def checkout(self):
         if self.cart != {}:
-            print('--------------------------Receipt--------------------------\n')
+            print("------------------|-receipt-|------------------\nYour cashier's name is Kevin McClain\n")
             total = 0
             for item, info in self.cart.items():
+                time
                 print(f"{info['how many']} {item.title()}(s) for ${info['price']:.2f} each.\n")
                 total += info['how many'] * info['price']
             print(f'Your total is ${total:.2f}.\n')
+            print("Follow this link for a chance to win big!\n\nhttps://github.com/12mmhamdan\n\n------------------|-receipt-|------------------\n")
+            
         else:
             print("You can't checkout. Your cart is empty.")
             welcome()
 
-
-
-
-# Welcome intro main function
+    # Welcome intro
 def welcome():
-    choices = ('add', 'remove', 'show', 'clear', 'checkout')
-    cart = Cart()
-    print("Hello, Welcome To The Best Local Mart!")
-    time.sleep(3)
+    # name = input('Enter your name: ') put name as a parameter in cart = Cart(name)
+    choices = {'add', 'remove', 'view', 'clear', 'checkout'}
+    name = input('Enter your name: ')
+    cart = Cart(name)
+    clear_output()
+    print(f"\nHi {name}! Welcome to the best local mart in town!")
+    time.sleep(4)
     clear_output()
     while True:
-        response = input("Please choose what you would like to do with your cart. \nWould you like to: Add, Remove, Show, Checkout or Clear? ").lower()
+        response = input("What action would you like to choose for your cart today? \n\nWould you like to: Add, Remove, View, Checkout or Clear? ").lower()
         if response in choices:
             if response == 'add':
                 clear_output()
@@ -108,56 +115,21 @@ def welcome():
             elif response == 'remove':
                 clear_output()
                 cart.remove_from_cart()
-            elif response == 'show':
+            elif response == 'view':
                 clear_output()
-                cart.show_cart()
+                cart.view_cart()
             elif response == 'clear':
                 clear_output()
                 cart.clear_cart()
             elif response == 'checkout':
                 clear_output()
                 cart.checkout()
-                print("It was a pleasure doing business with you! \n---------------------Have a Great Day!---------------------")
+                print(f"Thanks {name}! It was a pleasure doing business with you!")
                 break
         else:
             clear_output()
-            print(f"{response} is not a valid selection, \nplease select from {choices}. ")
-            time.sleep(4)
+            print(f"'{response.title()}' is not one of the available options.\nPlease select from {choices}.")
+            time.sleep(6)
             clear_output()
 
-
-
-
-
-
-
-
-
-
-# Running main function   
 welcome()
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
